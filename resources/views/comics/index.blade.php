@@ -17,7 +17,7 @@
         <tbody>
           @forelse ($comics as $comic)
               <tr>
-                <td><a href="{{route('comics.show', $comic)}}">{{$comic->title}}</a></td>
+                <td><a href="{{route('comics.show', $comics)}}">{{$comic->title}}</a></td>
                 <td>{{ $comic->id }}</td>
                 <td><img src="{{ $comic->thumb }}" width="40" alt=""></td>
                 <td>{{ $comic->type }}</td>
