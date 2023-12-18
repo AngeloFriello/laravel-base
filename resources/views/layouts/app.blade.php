@@ -12,6 +12,7 @@
         <ul>
             <li><a href="{{route('comics.index')}}">vai alla lista dei comics</a></li>
             <li><a href="{{route('home')}}">vai alla home page</a></li>
+            <li><a href="{{route('comics.create')}}">vai alla creazione di un nuovo fumetto</a></li>
         </ul>
     </header>
     <main>
