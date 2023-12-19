@@ -17,7 +17,7 @@
         <tbody>
           @forelse ($comics as $comic)
               <tr>
-                <td><a href="{{route('comics.show', $comics)}}">{{$comic->title}}</a></td>
+                <td><a href="{{route('comics.show', $comic)}}">{{$comic->title}}</a></td>
                 <td>{{ $comic->id }}</td>
                 <td><img src="{{ $comic->thumb }}" width="40" alt=""></td>
                 <td>{{ $comic->type }}</td>
@@ -25,8 +25,18 @@
                 <td>{{ $comic->series }}</td>
                 <td>{{ $comic->price }}</td>
                 <td>
-                  <span>edit</span>
-                  <span>delete</span>
+                <span><a href="{{route('comics.edit', $comic)}}" class="btn btn-secondary">Edit</a></span>
+                <span>
+                    <form action="{{route('comics.destroy', $comic)}}" method="POST">
+
+                        @csrf
+
+                        @method('DELETE')
+
+                        <input type="submit" value="Cancella" class="btn btn-primary">
+
+                    </form>
+                </span>
                 </td>
               </tr>
           @empty

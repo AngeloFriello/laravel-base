@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Comic;
+
 use App\Https\Requests\StoreComicRequest;
 use App\Https\Requests\UpdateComicRequest;
-
+use App\Models\Comic;
+use Illuminate\Http\Request;
 class ComicController extends Controller
 {
     /**
@@ -40,10 +40,9 @@ class ComicController extends Controller
         $newComic->series = $data['series'];
         $newComic->price = $data['price'];
         $newComic->thumb = $data['thumb'];
-
+        $newComic->save();
 
         return redirect()->route('comics.show', $newComic->id);
-
     }
 
     /**
@@ -59,9 +58,9 @@ class ComicController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Comic $comic)
     {
-        //
+        return view('comics.edit', compact('comic'));
     }
 
     /**
@@ -70,16 +69,20 @@ class ComicController extends Controller
     public function update(Request $request, Comic $comic)
     {
         $data = $request->all();
+
         $comic->update($data);
+
         
-        return redirect()->route('comics.show', $comic->id);
+        return redirect()->route('comics.show', $comic);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Comic $comic)
     {
-        //
+        $comic->delete();
+
+        return redirect()->route('comics.index');
     }
 }
